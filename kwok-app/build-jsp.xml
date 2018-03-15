@@ -1,0 +1,26 @@
+<project name="jsp-compile">
+
+	<import file="${tomcat.home}/bin/catalina-tasks.xml"/>
+
+	<!-- Compile jsp pages -->
+	<target name="jspc"> 
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${jspsrc.dir}/WEB-INF" />
+
+	    <jasper validateXml="false" 
+			 failOnError="false"
+             uriroot="${web.dir}" 
+             webXmlFragment="${jspsrc.dir}/WEB-INF/generated_web.xml" 
+             outputDir="${jspsrc.dir}/jsp" />
+			 
+        <javac srcdir="${jspsrc.dir}/jsp" destdir="${build.dir}" classpathref="classpath"/>
+
+		<loadfile property="generated_web.xml" 
+			srcFile="${jspsrc.dir}/WEB-INF/generated_web.xml"/>
+
+		<replace file="${dist.dir}/WEB-INF/web.xml" value="${generated_web.xml}"
+			token="&lt;!-- Automatically created by Apache Jakarta Tomcat JspC --&gt;"/>
+
+		<delete dir="${jspsrc.dir}/jsp"/>
+	</target>
+</project>

@@ -1,0 +1,3 @@
+hardware_name,hardware_description,hardware_model_name,hardware_model_number,hardware_serial_number,hardware_purchase_date,hardware_warranty_expire_date,hardware_owner_username,hardware_purchase_price,hardware_location,hardware_status,hardware_type,hardware_manufacturer_name,hardware_vendor_name,Custom Field 1
+Sample Hardware 1,Description,,,,2013-04-20,,admin,999.99,Headquarter,Available,Server,Dell,Dell,S0001
+Sample Hardware 2,Description,Officejet,,,,2014-04-20,admin,999.99,Headquarter,Available,Printer,HP,HP,P0001

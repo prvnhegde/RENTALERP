@@ -1,0 +1,3 @@
+username, first_name, last_name, display_name, email, status, group_name, password
+user1, 1, User, User 1, user1@localhost, ENABLED, Test Group, user1
+user2, 2, User, User 2, user2@localhost, DISABLED, Test Group, user2

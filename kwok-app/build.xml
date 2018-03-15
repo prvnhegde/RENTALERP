@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kwok" default="build" basedir=".">
+	<description>
+		App build file.
+	</description>
+
+    <!-- Set global properties for this build -->
+    <property name="build.dir" value="build/classes"/>
+    <property name="dist.dir" value="dist/${ant.project.name}"/>
+	<property name="lib.compile.dir" value="lib-compile"/>
+    <property name="src.dir" value="src"/>
+    <property name="web.dir" value="web"/>
+	<property name="web.jar.classes.dir" value="web-jar/WEB-INF/classes"/>
+	<property name="web.jar.resources.dir" value="web-jar"/>
+    <property name="web.lib.dir" value="web/WEB-INF/lib"/>
+	<property name="build.properties" value="web-jar/WEB-INF/classes/build.properties"/>
+
+	<property file="${build.properties}"/>
+
+    <!-- Includes libs required for compile -->
+    <path id="classpath">
+		<fileset dir="${lib.compile.dir}" includes="**/*.jar"/>
+        <fileset dir="${web.lib.dir}" includes="**/*.jar"/>
+    </path>
+
+	<!-- Clean the target -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile java classes -->
+    <target name="build">
+		<mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" source="1.8" target="1.8" debug="on">
+		    <compilerarg line="-Xlint:unchecked" />
+		</javac>
+	</target>
+	
+    <!-- Create distribution -->
+    <target name="dist" depends="clean,build">
+		<!-- Write build date to properties file -->
+		<propertyfile file="${build.properties}">
+			<entry key="build.date" type="date" value="now" pattern="yyyyMMdd"/>
+		</propertyfile>
+
+		<copy todir="${dist.dir}">
+            <fileset dir="${web.dir}" excludes="**/*.java"/>
+        </copy>
+
+		<jar destfile="${dist.dir}/WEB-INF/lib/${ant.project.name}-${app.version}.jar">
+			<!-- Not includes files under com/kwoksys/test. -->
+			<fileset dir="${build.dir}" excludes="com/kwoksys/test/**"/>
+			<fileset dir="${web.jar.classes.dir}"/>
+			<!-- For some reason, with excludes WEB-INF/**, files in that folder will be included. -->
+			<fileset dir="${web.jar.resources.dir}" excludes="WEB-INF/**"/>
+		</jar>
+	</target>
+</project>

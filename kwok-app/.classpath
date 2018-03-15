@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main"/>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web;#system#"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-axiom-api-1.2.7.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-axiom-dom-1.2.7.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-axiom-impl-1.2.7.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-configuration-1.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-fileupload-1.3.2.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-commons-validator-1.1.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-jcs-1.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-struts-1.2.7.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/freemarker-2.3.23.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/iText-2.1.5.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/junit-4.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/kwok-license.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/opencsv-1.8.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/oswego-util-concurrent-1.3.4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/postgresql-9.0-801.jdbc4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/sun-javamail-1.5.4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-api-2.7.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/apache-struts2-core-2.5.10.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/ognl-3.1.12.jar"/>
+	<classpathentry kind="lib" path="C:/kwok/kwok-code-4351-trunk/kwok-app/lib-compile/tomcat-7.0.41_x64-jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/kwok/kwok-code-4351-trunk/kwok-app/lib-compile/tomcat-7.0.41_x64-servlet-api.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

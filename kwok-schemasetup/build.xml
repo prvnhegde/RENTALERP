@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kwok-schemasetup" default="build" basedir=".">
+	<description>
+		Build file for the schemasetup.
+	</description>
+
+	<property file="src/com/kwoksys/schema/Schema.properties"/>
+
+    <!-- Set global properties for this build -->
+    <property name="build.dir" value="build/classes"/>
+	<property name="dist.dir" value="dist/database"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="src.dir" value="src"/>
+	<property name="jar.file.path" value="${dist.dir}/${ant.project.name}-${schema.version}.jar"/>
+	<property name="manifest.mf" value="META-INF/MANIFEST.MF"/>
+
+    <!-- Includes libs required for compile -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <!-- Clean the target -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>		
+    </target>
+
+    <!-- Build webapp -->
+    <target name="build">
+		<mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" source="1.8" target="1.8" debug="on"/>
+	</target>
+
+    <!-- Create distribution -->
+    <target name="dist" depends="clean,build">
+		<!-- Include a MANIFEST.MF to make the jar executable 
+	    <manifest file="${manifest.mf}">
+			<attribute name="Main-Class" value="com.kwoksys.schema.SchemaSetup"/>
+	    </manifest>-->
+
+		<mkdir dir="${dist.dir}"/>
+		 
+        <!--<jar destfile="${ant.project.name}-${DSTAMP}.jar" basedir="${dist.temp.dir}"/>-->
+		<jar destfile="${jar.file.path}" basedir="${build.dir}" manifest="${manifest.mf}">
+			<zipfileset src="lib/postgresql-8.2-507.jdbc4.jar" />
+			<zipfileset src="lib/apache-commons-codec-1.3.jar" />
+			<zipfileset src="lib/kwok-license.jar" />
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+		</jar>
+    </target>
+</project>

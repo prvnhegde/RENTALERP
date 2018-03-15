@@ -1,0 +1,264 @@
+<%--
+ * Copyright 2017 Kwoksys
+ *
+ * http://www.kwoksys.com/LICENSE
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+--%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://www.kwoksys.com/tags" prefix="k" %>
+
+<style type="text/css">
+    .thisHeader {
+        text-align: center; font-weight: bold;
+    }
+    .thisChart {
+        text-align: center;
+    }
+</style>
+
+<div class="section">
+<ul>
+    <k:foreach id="link" name="linkList">
+        <li>${link}</li>
+    </k:foreach>
+</ul>
+
+<k:notEmpty name="warrantyExpirationLinks">
+<p><b><k:message key="hardware.summary.byWarrantyExpiration"/></b>
+<ul>
+<k:foreach id="link" name="warrantyExpirationLinks">
+    <li>${link}</li>
+</k:foreach>
+</ul>
+</k:notEmpty>
+</div>
+
+<%-- Hardware summary. --%>
+<h3 class="noLine"><k:message key="itMgmt.index.hardwareTypeCountHeader"/></h3>
+    <%-- Hardware type count --%>
+    <div class="box borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.hardwareTypeCountDesc"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartHardwareTypes"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareTypeCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareTypeCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div>${row.countKey}</div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    <%-- Hardware status count --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.hardwareStatusCountDesc"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartHardwareStatus"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareStatusCounts")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareStatusCounts">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    <%-- Hardware location count --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.hardwareLocationCountDesc"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartHardwareLocation"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareLocationCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareLocationCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    
+    
+       <%-- Hardware type count  Rental --%>
+    <div class="box borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.rentalbytype"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartRentalTypes"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareTypeCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareRentoutTypeCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div>${row.countKey}</div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    <%-- Hardware status count Rental  --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.rentalbycustomer"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartRentalCustomer"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareStatusCounts")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareRentoutByCustomerCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    
+        <%-- Hardware location count Rental  --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.rentalbyduration"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartRentalDuration"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareLocationCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareRentoutByDurationCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+
+       <%-- Hardware type count  ROI --%>
+    <div class="box borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.roibytype"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartROITypes"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareTypeCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareTypeCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div>${row.countKey}</div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    <%-- Hardware status count ROI  --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.roibycustomer"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartROICustomer"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareStatusCounts")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareStatusCounts">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+    
+        <%-- Hardware location count    ROI  --%>
+    <div class="box borderLeft borderTop lightGrayBorder" style="width:33%; min-width:400px">
+        <p class="thisHeader"><k:message key="itMgmt.index.roibyduration"/>
+        <div class="thisChart">
+            <% request.setAttribute("chartId", "chartROIDuration"); %>
+            <% request.setAttribute("chartData", request.getAttribute("hardwareLocationCountList")); %>
+            <jsp:include page="/jsp/hardware/HardwarePieChartTemplate.jsp"/>
+        </div>
+        <table class="stats standard stripedListTable" style="width: 100%">
+        <k:foreach id="row" name="hardwareLocationCountList">
+            <tr class="dataRowHoverOff">
+                <th style="width:1px"><span class="chartLegend" style="background-color:${row.color}"></span></th>
+                <th><a href="${row.path}"><div><k:write value="${row.countKey}"/></div></a></th>
+                <td><a href="${row.path}"><div>${row.countValue}</div></a></td></tr>
+        </k:foreach>
+        </table>
+    </div>
+
+<div style="clear:both"></div>
+
+<script type="text/javascript">
+    var ctx = document.getElementById("chartHardwareTypes").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareTypesData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartHardwareStatus").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareStatusData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartHardwareLocation").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareLocationData, {
+        animation : false
+    }); 
+    
+    //New Chart - Rental    
+    var ctx = document.getElementById("chartRentalTypes").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareTypesData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartRentalCustomer").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareStatusData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartRentalDuration").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareLocationData, {
+        animation : false
+    }); 
+    
+    
+    //New Chart - ROI    
+    var ctx = document.getElementById("chartROITypes").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareTypesData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartROICustomer").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareStatusData, {
+        animation : false
+    });
+
+    ctx = document.getElementById("chartROIDuration").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(chartHardwareLocationData, {
+        animation : false
+    }); 
+
+</script>
+
+<%-- Hardware search --%>
+<h3><k:message key="itMgmt.index.searchHeader"/></h3>
+
+<jsp:include page="/jsp/hardware/HardwareSearchTemplate.jsp"/>

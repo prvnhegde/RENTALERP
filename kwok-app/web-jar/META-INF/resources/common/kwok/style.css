@@ -1,0 +1,520 @@
+/*
+ * Copyright 2016 Kwoksys
+ *
+ * http://www.kwoksys.com/LICENSE
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Default Stylesheet
+ */
+html,body {
+	margin:0;
+	padding:0;
+	height:100%; /* needed for container min-height */
+    width:100%;
+}
+body, select, textarea, input, pre {
+	font-family:arial,verdana,sans-serif;
+}
+input[type="submit"], input[type="button"], button {
+	padding:5px 8px;
+}
+input[type="text"], input[type="password"], textarea {
+	border: #ccc 1px solid; padding:6px;
+}
+select {
+	border: #ccc 1px solid; padding:5px;
+}
+a {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+img {
+    border:0;
+}
+img.standard {
+    vertical-align:middle; padding-left:3px; padding-right:3px;
+}
+p {
+    line-height:1.5;
+}
+pre {
+    border-width:1px; border-style:dashed; padding:1em;
+}
+ul {
+    margin:.3em 0 0 1.5em; list-style-type:square; padding:0; list-style-image:url(images/bullet.gif);
+}
+li {
+    line-height:1.6;
+}
+.section, h1, h2, h3, h4, h5, h6 {
+    padding:0 10px 0 10px;
+}
+
+/* Layout */
+#container {
+    position:relative; /* needed for footer positioning*/
+    margin:0 auto; /* center, not in IE5 */
+    width:100%;
+    height:auto !important; /* real browsers */
+    height:100%; /* IE6: treaded as min-height*/
+    min-height:100%; /* real browsers */
+}
+#content {
+    padding:0;
+    height:100%; width:100%;
+}
+#contentContainer {
+    padding:0 0 5em 0; width:100%; vertical-align:top; /* bottom padding for footer */
+}
+#sponsorAd {
+    vertical-align:top; border-left:#ddd 1px solid;
+}
+#headerLogo {
+    float:left; padding:6px;
+}
+#headerLinks {
+    float:right; padding:6px;
+}
+/* Module tabs */
+#moduleTabs {
+    border-top:1px solid #ccc; border-bottom-style:solid; border-bottom-width:1px; clear:left;
+}
+#moduleTabs ul {
+    float:left; margin:0 0 -1px 0; padding:0;
+}
+#moduleTabs ul li {
+    display:inline; margin:0 0 -1px 0;
+}
+#moduleTabs ul li a {
+    float:left; font-weight:bold; padding:7px 12px 7px 12px; border-right-style:solid; border-right-width:1px; border-bottom-style:solid; border-bottom-width:1px; text-decoration:none;
+}
+/* Tabs */
+#tabs {
+    margin:0; height:20px;
+}
+#tabs a.inactive {
+    border-bottom:none; font-weight:bold; float:left; line-height:14px; margin-right:4px; padding:3px 10px 3px 10px;
+}
+#tabs .active {
+    border-bottom:none; font-weight:bold; float:left; line-height:14px; margin-right:4px; padding:3px 10px 3px 10px;
+}
+/* Footer */
+#footer {
+    position:absolute;
+    width:100%;
+    bottom:0; /* stick to bottom */
+    text-align:center;
+}
+#footer a {
+    text-decoration:underline;
+}
+/* Colors */
+.darkOrange, h1, h2, h3, h4, h5, h6, a.h1:link, a.h1:visited, a.rssTitle, .expiredDate {
+    color:#cc6633;
+}
+.white, #footer, #footer a, #genericHeaderTitle, #moduleTabs a, .loginButton,
+.themeHeader, .themeHeader th a, .themeHeader th a:hover {
+    color:white;
+}
+.brown, .warning, .message {
+    color:brown;
+}
+.red, .error, .required {
+    color:red;
+}
+.lightGray, .inactive , div.blogPostCommentHeader, div.blogPostCommentBody, .modal-close {
+	color:#999;
+}
+.darkGray, div.blogPermalink, .formSubscriberHeader , .infoContent, .formFieldDesc, span.command , #tabs a.inactive, .header3, .modal-close:hover {
+	color:#666;
+}
+.black, body, select, textarea, #tabs .active, .stats tr th a {
+    color:#0D0D0D;
+}
+.lightGrayBorder, .subCmds, .noscript, .notificationBar, .solidLine, h3, h2, .mediawikiH1, .mediawikiH2, .smallDottedLine, #rssItems,
+    div.blogPostCommentBody {
+    border-color:#ddd;
+}
+.standardBorder, #hardwareDetail, .kbArticleInfo, #tabs a, #tabs .active, .userInfo, iframe.portalIframe,
+    table.listTable, table.listTable td, table.listTable th, .tabBody {
+    border:#ddd 1px solid;
+}
+.darkGrayBorder, pre, .modal-btn-close:hover {
+    border-color:#bbb;
+}
+.whiteBg, .row2, body, select, textarea, #hardwareDetail, .emptyRow {
+    background-color:#fff;
+}
+.lightGrayBg, select:disabled, .row1, div.blogPostCommentBody, table.details th, #tabs a.inactive, pre, table.stripedListTable tr.dataRow:nth-of-type(odd),
+        table.stripedListTable tr.dataRowHoverOff:nth-of-type(odd) {
+    background-color:#f3f3f3;
+}
+input[type="submit"]:disabled, input[type="button"]:disabled, button:disabled {
+    background-color:#dddddd;
+    border-color:#ddd;
+    color:#bbb;
+}
+.peachBg, table.stripedListTable tr.dataRow:hover, .noscript, .notificationBar {
+    background-color:#f9edbe;
+}
+
+/* Font sizes */
+body, span.command {
+    font-size:13px;
+}
+.smallerFont, .infoContent, div.blogPermalink {
+    font-size:90%;
+}
+/* Title */
+h1, h2, h3, h4, h5, h6 {
+    margin:0;
+}
+h1 {
+    font-size:160%; padding-top:1.2em; padding-bottom:0.2em;
+}
+h2, a.rssTitle {
+    font-size:130%; padding-top:1em; padding-bottom:0.1em; margin-bottom:0.4em;
+}
+h3 {
+    font-size:110%; padding-top:1em; padding-bottom:0.1em; margin-bottom:0.2em;
+}
+h4 {
+    font-size:100%;
+}
+h5 {
+    font-size:100%;
+}
+h6 {
+    font-size:90%;
+}
+ul.hideIcon li {
+    list-style-type:none; line-height:1.6; list-style-image:none;
+}
+
+/* Standard Table */
+table.standard {
+    border-collapse:separate; line-height:20px; width:100%;
+}
+table.standard th {
+    font-weight:normal; text-align:left; white-space:nowrap;
+}
+table.standard td {
+    width:100%;
+}
+table.standard th, table.standard td {
+    padding:4px; vertical-align:top;
+}
+
+/* Nested Table. For overriding standard table style */
+table.nested th, table.nested td {
+    width:auto; background-color:#fff;
+}
+
+/* Form Table */
+table.standardForm, table.standardForm2 {
+    line-height:20px; width:100%;
+}
+table.standardForm th {
+    text-align:right; white-space:nowrap;
+}
+table.standardForm2 th {
+    text-align:left; white-space:nowrap;
+}
+table.standardForm2 td {
+    width:100%;
+}
+table.standardForm th, table.standardForm td,
+table.standardForm2 th, table.standardForm2 td {
+    padding:4px; vertical-align:top;
+}
+
+/* List Table */
+table.listTable,
+table.listTable td,
+table.listTable th,
+.tabBody td {
+    border-collapse:collapse; padding:6px; vertical-align: top; width: auto;
+}
+table.listTable th {
+    font-weight: normal; text-align: left;
+}
+table.listTable,
+.tabBody {
+    width:100%;
+}
+table.noBorder, table.noBorder td {
+    border:0px;
+}
+table th.rownum, table td.rownum {
+    width:10px;
+}
+.solidLine, h3, h2, .mediawikiH1, .mediawikiH2 {
+    border-bottom-width:1px; border-bottom-style:solid;
+}
+.noLine {
+    border:none;
+}
+.borderLeft {
+    border-left-width:1px; border-left-style:solid;
+}
+.borderTop {
+    border-top-width:1px; border-top-style:solid;
+}
+.smallDottedLine {
+    border-top-width:1px; border-top-style:dotted; padding:4px;
+}
+/* Main header */
+.mainHeader {
+    margin:0; padding:4px;
+}
+.themeHeader, .themeHeader th a, .themeHeader th a:hover {
+    text-decoration:none;
+}
+.themeHeader, .themeHeader th, .themeHeader td {
+    padding:6px;
+}
+.standardHeader {
+    font-weight:bold; padding:4px;
+}
+.emptyHeader {
+    line-height:0.2pt;
+}
+.stats {
+    width:100%;
+}
+.stats tr th, .stats tr td {
+    width:50%; padding:4px;
+}
+.stats a {
+    text-decoration:none;
+}
+.stats tr td a:hover {
+    text-decoration:underline;
+}
+
+.infoContent, .formFieldDesc, span.command {
+    font-weight:normal;
+}
+.wrap {
+    padding:0; margin:0; width:100%; height:100%; border-spacing:0; border-collapse:collapse;
+}
+.standardPadding, .btn {
+	padding:8px;
+}
+.btn:hover {
+    background-color:#e8e8e8; text-decoration:none;
+}
+a.btn {
+    text-decoration:none;
+}
+a.cancel {
+    padding-left:10px;
+}
+.subCmds, .noscript {
+    padding:8px; border-bottom-width:1px; border-bottom-style:solid;
+}
+.subCmds img {
+    vertical-align:middle; padding-right:2px; padding-bottom:3px;
+}
+.notificationBarWrapper {
+    margin-top:9px; position: absolute; text-align: center; right: 0; left:0;
+}
+.notificationBar {
+    border-width:1px; border-style:solid; border-radius:3px; padding:8px 14px 8px 14px;
+}
+.nav {
+    padding-top:6px;
+}
+.box {
+    float:left;
+}
+/* Common styles */
+.customField {
+    margin-bottom:12px;
+}
+.customFieldEmbedded table,
+.customFieldEmbedded table td,
+.customFieldEmbedded table th {
+    border:0; margin-bottom:-12px;
+}
+.noscript {
+    text-align:center;
+}
+span.chartLegend {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+/* Modal */
+/* Add Animation */
+@-webkit-keyframes modal-animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+@keyframes modal-animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: modal-animatetop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: modal-animatetop;
+    animation-duration: 0.5s
+}
+.modal-close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.modal-close:hover,
+.modal-close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-header {
+    padding: 2px 15px;
+}
+.modal-body {
+    padding: 26px 16px;
+    border-top: 1px solid #d1d4d7;
+    clear: both;
+}
+.modal-footer {
+    padding: 2px 16px;
+    border-top: 1px solid #d1d4d7; 
+    text-align: center;
+}
+button.modal-btn {
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out; 
+}
+#modal-btn-close {
+    color: #2a2c36;
+    background-color: #fff;
+    border-color: #ddd;
+}
+#modal-btn-close:hover {
+    background-color: #e6e6e6;
+}
+
+/* Home module */
+.loginButton {
+    line-height:20px; font-weight:bold; text-align:center; width:100%;
+}
+.userInfo {
+    padding:4px 14px 4px 14px; text-align:left;
+}
+.userInfo ul {
+    margin-left:0;
+}
+
+/* Hardware module */
+#hardwareDetail {
+    line-height:18px; position:absolute; top:0; display:none; width:360px; z-index:100;
+}
+#hardwareDetailActive {
+	height:300px; overflow:auto;
+}
+
+/* Issues module */
+.formSubscriberSelectbox {
+    width:196px;
+}
+.formSubscriberHeader {
+    font-weight:bold;
+}
+
+/* Knowledge Base module */
+.kbArticleInfo {
+    padding-left:10px;
+}
+
+/* Used in wiki */
+.link_https {
+    background:url(../silkicons/ext_link_https.gif) center right no-repeat;
+    padding-right:18px;
+}
+
+.link_http {
+    background:url(../silkicons/ext_link_http.png) center right no-repeat;
+    padding-right:14px;
+}
+
+.link_ftp {
+    background:url(../silkicons/ext_link_ftp.gif) center right no-repeat;
+    padding-right:18px;
+}
+
+/* Blogs module */
+div.blogPermalink {
+    margin-bottom:8px; padding-bottom:10px; padding-top:8px;
+}
+div.blogPostCommentBody {
+    border-top-width:1px; border-top-style:dotted; padding:2px;
+}
+
+/* RSS Feed module */
+#rssItems {
+    border-left-width:1px; border-left-style:dotted; padding-left:14px; width:96%;
+}
+div.rssTitle {
+    margin-bottom:4px; margin-top:12px; padding-top:12px; padding-bottom:2px;
+}
+a.rssTitle {
+    font-weight:bold;
+}
+/* Images */
+.image {
+    background-repeat:no-repeat;
+}
+.loadingImg {
+    background-image:url(../jstree-pre1.0/images/throbber.gif); background-position:0 0; padding:0 0 1px 18px;
+}
+.loadingContentImg {
+    background-image:url(../images/ajax-loader.gif); background-position:center; padding:10px 50% 280px 50%;
+}
+ 

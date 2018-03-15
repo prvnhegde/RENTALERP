@@ -1,0 +1,5 @@
+Thanks for downloading this pack of icons.  They are completely free for personal or commercial use, but they can not be resold individually or as a group.
+
+These icons were originally created for the Invision Power File Manager system (http://www.invisionfilemanager.com/), so the naming convention follows that system.  (If using that system, simply drop these into the root "images" folder to over-write the default icons.) These icons can be easily dropped into any website, application or other file management system.
+
+All icons are Copyright 2003 Kevin Potts.  For more information, or to request custom icon work, please contact Kevin at kevin@graphicpush.com.

@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Change default .action extension -->
+    <constant name="struts.action.extension" value="htm"/>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- Allow slashes in path -->
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+
+    <constant name="struts.devMode" value="false" />
+
+    <!-- Max upload size. 2147483648=2GB -->
+    <constant name="struts.multipart.maxSize" value="2147483648"/>
+
+    <package name="kwok-default" extends="struts-default">
+        <interceptors>
+            <interceptor name="requestProcessor" class="com.kwoksys.framework.struts2.RequestInterceptor"/>
+            <interceptor-stack name="requestProcessorStack">
+                <interceptor-ref name="exception">
+                    <param name="logEnabled">true</param>
+                    <param name="logLevel">error</param>
+                </interceptor-ref>
+                <interceptor-ref name="requestProcessor"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="requestProcessorStack"/>
+
+        <global-results>
+            <result name="standard_template">/jsp/common/template/StandardTemplate.jsp</result>
+            <result name="standard_autogen_template">/jsp/common/template/StandardAutogenTemplate.jsp</result>
+            <result name="ajax_template">/jsp/common/template/AjaxTemplate.jsp</result>
+            <!-- HTTP 401 -->
+            <result name="authentication_required">/jsp/common/errorpages/401.jsp</result>
+            <result name="ajax_authentication_required">/jsp/common/errorpages/Ajax401.jsp</result>
+            <!-- HTTP 403 -->
+            <result name="access_denied" type="chain">home/forbidden</result>
+            <!-- HTTP 404 -->
+            <result name="file_not_found" type="chain">home/page-not-found</result>
+
+            <result name="object_not_found" type="chain">home/object-not-found</result>
+            <result name="ajax_updateview">/jsp/common/template/AjaxUpdateView.jsp</result>
+            <result name="ajax_redirect">/jsp/common/template/AjaxRedirect.jsp</result>
+            <result name="non_supported_browser" type="chain">home/non-supported-browser</result>
+        </global-results>
+    </package>
+
+    <package name="default" extends="kwok-default">
+        <default-action-ref name="home/page-not-found"/>
+
+        <action name="admin/index" class="com.kwoksys.action.admin.IndexAction">
+            <result name="success">/jsp/admin/Index.jsp</result>
+        </action>
+        <action name="admin/attribute-list" class="com.kwoksys.action.admin.attribute.AttributeListAction">
+            <result name="success">/jsp/admin/attribute/AttributeList.jsp</result>
+        </action>
+        <action name="admin/attribute-detail" class="com.kwoksys.action.admin.attribute.AttributeDetailAction">
+            <result name="success">/jsp/admin/attribute/AttributeDetail.jsp</result>
+        </action>
+        <action name="admin/attribute-edit" class="com.kwoksys.action.admin.attribute.AttributeEditAction" method="edit">
+            <result name="success">/jsp/admin/attribute/AttributeEdit.jsp</result>
+        </action>
+        <action name="admin/attribute-edit-2" class="com.kwoksys.action.admin.attribute.AttributeEditAction" method="edit2"/>
+        <action name="admin/attribute-field-add" class="com.kwoksys.action.admin.attribute.AttributeFieldAddAction" method="add">
+            <result name="success">/jsp/admin/attribute/AttributeFieldAdd.jsp</result>
+        </action>
+        <action name="admin/attribute-field-add-2" class="com.kwoksys.action.admin.attribute.AttributeFieldAddAction" method="add2"/>
+        <action name="admin/attribute-field-edit" class="com.kwoksys.action.admin.attribute.AttributeFieldEditAction" method="edit">
+            <result name="success">/jsp/admin/attribute/AttributeFieldEdit.jsp</result>
+        </action>
+        <action name="admin/attribute-field-edit-2" class="com.kwoksys.action.admin.attribute.AttributeFieldEditAction" method="edit2"/>
+        <action name="admin/attribute-group-add" class="com.kwoksys.action.admin.attribute.AttributeGroupAddAction" method="add">
+            <result name="success">/jsp/admin/attribute/AttributeGroupAdd.jsp</result>
+        </action>
+        <action name="admin/attribute-group-add-2" class="com.kwoksys.action.admin.attribute.AttributeGroupAddAction" method="add2"/>
+        <action name="admin/attribute-group-edit" class="com.kwoksys.action.admin.attribute.AttributeGroupEditAction" method="edit">
+            <result name="success">/jsp/admin/attribute/AttributeGroupEdit.jsp</result>
+        </action>
+        <action name="admin/attribute-group-edit-2" class="com.kwoksys.action.admin.attribute.AttributeGroupEditAction" method="edit2"/>
+        <action name="admin/attribute-group-delete" class="com.kwoksys.action.admin.attribute.AttributeGroupDeleteAction" method="delete"/>
+        <action name="admin/attribute-group-delete-2" class="com.kwoksys.action.admin.attribute.AttributeGroupDeleteAction" method="delete2"/>
+        <action name="admin/cust-attr" class="com.kwoksys.action.admin.attribute.CustomAttributeAction">
+            <result name="success">/jsp/admin/attribute/CustomAttr.jsp</result>
+        </action>
+        <action name="admin/cust-attr-detail" class="com.kwoksys.action.admin.attribute.CustomAttributeDetailAction">
+            <result name="success">/jsp/admin/attribute/CustomAttrDetail.jsp</result>
+        </action>
+        <action name="admin/cust-attr-add" class="com.kwoksys.action.admin.attribute.CustomAttributeAddAction" method="add">
+            <result name="success">/jsp/admin/attribute/CustomAttrAdd.jsp</result>
+        </action>
+        <action name="admin/cust-attr-add-2" class="com.kwoksys.action.admin.attribute.CustomAttributeAddAction" method="add2"/>
+        <action name="admin/cust-attr-edit" class="com.kwoksys.action.admin.attribute.CustomAttributeEditAction" method="edit">
+            <result name="success">/jsp/admin/attribute/CustomAttrEdit.jsp</result>
+        </action>
+        <action name="admin/cust-attr-edit-2" class="com.kwoksys.action.admin.attribute.CustomAttributeEditAction" method="edit2"/>
+        <action name="admin/cust-attr-delete" class="com.kwoksys.action.admin.attribute.CustomAttributeDeleteAction" method="delete"/>
+        <action name="admin/cust-attr-delete-2" class="com.kwoksys.action.admin.attribute.CustomAttributeDeleteAction" method="delete2"/>
+
+        <!-- config is temporarily the entry point -->
+        <action name="admin/config" class="com.kwoksys.action.admin.config.ConfigAction">
+            <result name="system">/jsp/admin/config/ConfigSystem.jsp</result>
+            <result name="backup">/jsp/admin/config/ConfigDbBackup.jsp</result>
+            <result name="dbSequences">/jsp/admin/config/AjaxConfigDbSequences.jsp</result>
+            <result name="app">/jsp/admin/config/ConfigApp.jsp</result>
+            <result name="auth">/jsp/admin/config/ConfigAuth.jsp</result>
+            <result name="ldapTest">/jsp/admin/config/ConfigAuthLdapTest.jsp</result>
+            <result name="email">/jsp/admin/config/ConfigEmail.jsp</result>
+            <result name="file">/jsp/admin/config/ConfigFile.jsp</result>
+            <result name="look">/jsp/admin/config/ConfigLook.jsp</result>
+        </action>
+
+        <action name="admin/config-write" class="com.kwoksys.action.admin.config.ConfigWriteAction">
+            <result name="backupEdit">/jsp/admin/config/ConfigDbBackupEdit.jsp</result>
+            <result name="appEdit">/jsp/admin/config/ConfigAppEdit.jsp</result>
+            <result name="authEdit">/jsp/admin/config/ConfigAuthEdit.jsp</result>
+            <result name="emailEdit">/jsp/admin/config/ConfigEmailSmtpEdit.jsp</result>
+            <result name="popEmailEdit">/jsp/admin/config/ConfigEmailPopEdit.jsp</result>
+            <result name="companyEdit">/jsp/admin/config/ConfigCompanyEdit.jsp</result>
+            <result name="fileEdit">/jsp/admin/config/ConfigFileEdit.jsp</result>
+            <result name="lookEdit">/jsp/admin/config/ConfigLookEdit.jsp</result>
+            <result name="loggingEdit">/jsp/admin/config/ConfigLoggingEdit.jsp</result>
+        </action>
+
+        <!-- Data import -->
+        <action name="admin/data-import-index" class="com.kwoksys.action.admin.dataimport.IndexAction">
+            <result name="success">/jsp/admin/dataimport/Index.jsp</result>
+        </action>
+        <action name="admin/data-import-validate" class="com.kwoksys.action.admin.dataimport.ValidateAction">
+            <result name="success">/jsp/admin/dataimport/Validate.jsp</result>
+        </action>
+        <action name="admin/data-import-execute" class="com.kwoksys.action.admin.dataimport.ExecuteAction"/>
+        <action name="admin/data-import-results" class="com.kwoksys.action.admin.dataimport.ResultsAction">
+            <result name="success">/jsp/admin/dataimport/Results.jsp</result>
+        </action>
+
+        <!-- Groups -->
+        <action name="admin/group-list" class="com.kwoksys.action.admin.manageusers.GroupListAction">
+            <result name="success">/jsp/admin/manageusers/GroupList.jsp</result>
+        </action>
+        <action name="admin/group-detail" class="com.kwoksys.action.admin.manageusers.GroupDetailAction"/>
+        <action name="admin/group-add" class="com.kwoksys.action.admin.manageusers.GroupAddAction" method="add">
+            <result name="success">/jsp/admin/manageusers/GroupAdd.jsp</result>
+        </action>
+        <action name="admin/group-add-2" class="com.kwoksys.action.admin.manageusers.GroupAddAction" method="add2"/>
+        <action name="admin/group-delete" class="com.kwoksys.action.admin.manageusers.GroupDeleteAction" method="delete"/>
+        <action name="admin/group-delete-2" class="com.kwoksys.action.admin.manageusers.GroupDeleteAction" method="delete2"/>
+        <action name="admin/group-edit" class="com.kwoksys.action.admin.manageusers.GroupEditAction" method="edit">
+            <result name="success">/jsp/admin/manageusers/GroupEdit.jsp</result>
+        </action>
+        <action name="admin/group-edit-2" class="com.kwoksys.action.admin.manageusers.GroupEditAction" method="edit2"/>
+        <action name="admin/group-access" class="com.kwoksys.action.admin.manageusers.GroupAccessAction"/>
+        <action name="admin/group-access-edit" class="com.kwoksys.action.admin.manageusers.GroupAccessEditAction" method="edit">
+            <result name="success">/jsp/admin/manageusers/GroupAccessEdit.jsp</result>
+        </action>
+        <action name="admin/group-access-edit-2" class="com.kwoksys.action.admin.manageusers.GroupAccessEditAction" method="edit2"/>
+
+        <!-- Users -->
+        <action name="admin/user-index" class="com.kwoksys.action.admin.manageusers.UserIndexAction">
+            <result name="success">/jsp/admin/manageusers/UserIndex.jsp</result>
+        </action>
+        <action name="admin/user-list" class="com.kwoksys.action.admin.manageusers.UserListAction">
+            <result name="success">/jsp/admin/manageusers/UserList.jsp</result>
+        </action>
+        <action name="admin/user-list-export" class="com.kwoksys.action.admin.manageusers.UserListExportAction"/>
+        <action name="admin/user-access" class="com.kwoksys.action.admin.manageusers.UserAccessAction">
+            <result name="success">/jsp/admin/manageusers/UserAccess.jsp</result>
+        </action>
+        <action name="admin/user-access-edit-2" class="com.kwoksys.action.admin.manageusers.UserAccessAction" method="edit2"/>
+        <action name="admin/user-detail" class="com.kwoksys.action.admin.manageusers.UserDetailAction">
+            <result name="success">/jsp/admin/manageusers/UserDetail.jsp</result>
+        </action>
+        <action name="admin/user-add" class="com.kwoksys.action.admin.manageusers.UserAddAction" method="add">
+            <result name="success">/jsp/admin/manageusers/UserAdd.jsp</result>
+        </action>
+        <action name="admin/user-add-2" class="com.kwoksys.action.admin.manageusers.UserAddAction" method="add2"/>
+        <action name="admin/user-delete" class="com.kwoksys.action.admin.manageusers.UserDeleteAction" method="delete"/>
+        <action name="admin/user-delete-2" class="com.kwoksys.action.admin.manageusers.UserDeleteAction" method="delete2"/>
+        <action name="admin/user-edit" class="com.kwoksys.action.admin.manageusers.UserEditAction" method="edit">
+            <result name="success">/jsp/admin/manageusers/UserEdit.jsp</result>
+        </action>
+        <action name="admin/user-edit-2" class="com.kwoksys.action.admin.manageusers.UserEditAction" method="edit2"/>
+        <action name="admin/user-hardware" class="com.kwoksys.action.admin.manageusers.UserHardwareAction">
+            <result name="success">/jsp/admin/manageusers/UserHardware.jsp</result>
+        </action>
+        <action name="admin/user-pw-reset" class="com.kwoksys.action.admin.manageusers.UserPasswordResetAction" method="reset">
+            <result name="success">/jsp/admin/manageusers/UserPasswordReset.jsp</result>
+        </action>
+        <action name="admin/user-pw-reset-2" class="com.kwoksys.action.admin.manageusers.UserPasswordResetAction" method="reset2"/>
+        <action name="admin/user-logout" class="com.kwoksys.action.admin.manageusers.UserLogoutAction"/>
+
+        <action name="auth/verify-password" class="com.kwoksys.action.auth.VerifyPasswordAction"/>
+        <action name="auth/logout" class="com.kwoksys.action.auth.LogoutAction"/>
+
+        <!--
+            Blogs
+        -->
+        <action name="blogs/index" class="com.kwoksys.action.blogs.IndexAction">
+            <result name="success">/jsp/blogs/Index.jsp</result>
+        </action>
+        <action name="blogs/post-list" class="com.kwoksys.action.blogs.PostListAction">
+            <result name="success">/jsp/blogs/PostList.jsp</result>
+        </action>
+        <action name="blogs/post-list-rss" class="com.kwoksys.action.blogs.PostListRssAction"/>
+        <action name="blogs/post-detail" class="com.kwoksys.action.blogs.PostDetailAction">
+            <result name="success">/jsp/blogs/PostDetail.jsp</result>
+        </action>
+        <action name="blogs/post-comment-add-2" class="com.kwoksys.action.blogs.PostCommentAdd2Action"/>
+        <action name="blogs/post-add" class="com.kwoksys.action.blogs.PostAddAction" method="add">
+            <result name="success">/jsp/blogs/PostAdd.jsp</result>
+        </action>
+        <action name="blogs/post-add-2" class="com.kwoksys.action.blogs.PostAddAction" method="add2"/>
+        <action name="blogs/post-edit" class="com.kwoksys.action.blogs.PostEditAction" method="edit">
+            <result name="success">/jsp/blogs/PostEdit.jsp</result>
+        </action>
+        <action name="blogs/post-edit-2" class="com.kwoksys.action.blogs.PostEditAction" method="edit2"/>
+        <action name="blogs/post-delete" class="com.kwoksys.action.blogs.PostDeleteAction" method="delete">
+            <result name="delete">/jsp/blogs/PostDelete.jsp</result>
+        </action>
+        <action name="blogs/post-delete-2" class="com.kwoksys.action.blogs.PostDeleteAction" method="delete2"/>
+        <action name="blogs/category-list" class="com.kwoksys.action.blogs.CategoryAction" method="list"/>
+        <action name="blogs/category-add" class="com.kwoksys.action.blogs.CategoryAction" method="add">
+            <result name="success">/jsp/blogs/CategoryAdd.jsp</result>
+        </action>
+        <action name="blogs/category-add-2" class="com.kwoksys.action.blogs.CategoryAction" method="add2"/>
+        <action name="blogs/category-edit" class="com.kwoksys.action.blogs.CategoryAction" method="edit">
+            <result name="success">/jsp/blogs/CategoryEdit.jsp</result>
+        </action>
+        <action name="blogs/category-edit-2" class="com.kwoksys.action.blogs.CategoryAction" method="edit2"/>
+
+        <!--
+            Contacts
+        -->
+        <action name="contacts/company-add" class="com.kwoksys.action.contacts.CompanyAddAction" method="add">
+            <result name="success">/jsp/contacts/CompanyAdd.jsp</result>
+        </action>
+        <action name="contacts/company-add-2" class="com.kwoksys.action.contacts.CompanyAddAction" method="add2"/>
+        <action name="contacts/company-bookmark" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="index">
+            <result name="success">/jsp/contacts/CompanyBookmark.jsp</result>
+        </action>
+        <action name="contacts/company-bookmark-add" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="add">
+            <result name="success">/jsp/contacts/CompanyBookmarkAdd.jsp</result>
+        </action>
+        <action name="contacts/company-bookmark-add-2" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="add2"/>
+        <action name="contacts/company-bookmark-delete-2" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="delete2"/>
+        <action name="contacts/company-bookmark-edit" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="edit">
+            <result name="success">/jsp/contacts/CompanyBookmarkEdit.jsp</result>
+        </action>
+        <action name="contacts/company-bookmark-edit-2" class="com.kwoksys.action.contacts.CompanyBookmarkAction" method="edit2"/>
+        <action name="contacts/company-contact" class="com.kwoksys.action.contacts.CompanyContactAction"/>
+        <action name="contacts/company-contact-add" class="com.kwoksys.action.contacts.CompanyContactAddAction" method="add">
+            <result name="success">/jsp/contacts/CompanyContactAdd.jsp</result>
+        </action>
+        <action name="contacts/company-contact-add-2" class="com.kwoksys.action.contacts.CompanyContactAddAction" method="add2"/>
+        <action name="contacts/company-contact-delete" class="com.kwoksys.action.contacts.CompanyContactDeleteAction" method="delete"/>
+        <action name="contacts/company-contact-delete-2" class="com.kwoksys.action.contacts.CompanyContactDeleteAction" method="delete2"/>
+        <action name="contacts/company-contact-edit-2" class="com.kwoksys.action.contacts.CompanyContactEdit2Action"/>
+        <action name="contacts/company-contact-edit" class="com.kwoksys.action.contacts.CompanyContactEditAction">
+            <result name="success">/jsp/contacts/CompanyContactEdit.jsp</result>
+        </action>
+        <action name="contacts/company-contact-export" class="com.kwoksys.action.contacts.CompanyContactExportAction"/>
+        <action name="contacts/company-contracts" class="com.kwoksys.action.contacts.CompanyContractsAction"/>
+        <action name="contacts/company-delete" class="com.kwoksys.action.contacts.CompanyDeleteAction" method="delete"/>
+        <action name="contacts/company-delete-2" class="com.kwoksys.action.contacts.CompanyDeleteAction" method="delete2"/>
+        <action name="contacts/company-detail" class="com.kwoksys.action.contacts.CompanyDetailAction">
+            <result name="success">/jsp/contacts/CompanyDetail.jsp</result>
+        </action>
+        <action name="contacts/company-edit" class="com.kwoksys.action.contacts.CompanyEditAction" method="edit">
+            <result name="success">/jsp/contacts/CompanyEdit.jsp</result>
+        </action>
+        <action name="contacts/company-edit-2" class="com.kwoksys.action.contacts.CompanyEditAction" method="edit2"/>
+        
+        <!-- Company files -->
+        <action name="contacts/company-file" class="com.kwoksys.action.contacts.CompanyFileAction" method="list"/>
+        <action name="contacts/company-file-add" class="com.kwoksys.action.contacts.CompanyFileAction" method="add"/>
+        <action name="contacts/company-file-add-2" class="com.kwoksys.action.contacts.CompanyFileAction" method="add2"/>
+        <action name="contacts/company-file-edit" class="com.kwoksys.action.contacts.CompanyFileAction" method="edit"/>
+        <action name="contacts/company-file-edit-2" class="com.kwoksys.action.contacts.CompanyFileAction" method="edit2"/>
+        <action name="contacts/company-file-delete" class="com.kwoksys.action.contacts.CompanyFileAction" method="delete"/>
+        <action name="contacts/company-file-delete-2" class="com.kwoksys.action.contacts.CompanyFileAction" method="delete2"/>
+        <action name="contacts/company-file-download" class="com.kwoksys.action.contacts.CompanyFileAction" method="download"/>
+        
+        <action name="contacts/company-list" class="com.kwoksys.action.contacts.CompanyListAction"/>
+        <action name="contacts/company-list-export" class="com.kwoksys.action.contacts.CompanyListExportAction"/>
+                
+        <action name="contacts/company-note" class="com.kwoksys.action.contacts.CompanyNoteAction">
+            <result name="success">/jsp/contacts/CompanyNote.jsp</result>
+        </action>
+        <action name="contacts/company-note-add" class="com.kwoksys.action.contacts.CompanyNoteAddAction">
+          <result name="success">/jsp/contacts/CompanyNoteAdd.jsp</result>
+        </action>
+        <action name="contacts/company-note-add-2" class="com.kwoksys.action.contacts.CompanyNoteAdd2Action"/>
+        <action name="contacts/contact-add-2" class="com.kwoksys.action.contacts.ContactAdd2Action"/>
+        <action name="contacts/contact-add" class="com.kwoksys.action.contacts.ContactAddAction">
+          <result name="success">/jsp/contacts/ContactAdd.jsp</result>
+        </action>
+        <action name="contacts/contact-delete" class="com.kwoksys.action.contacts.ContactDeleteAction" method="delete"/>
+        <action name="contacts/contact-delete-2" class="com.kwoksys.action.contacts.ContactDeleteAction" method="delete2"/>
+        <action name="contacts/contact-detail" class="com.kwoksys.action.contacts.ContactDetailAction"/>
+        <action name="contacts/contact-detail-vcard" class="com.kwoksys.action.contacts.ContactDetailVCardAction"/>
+        <action name="contacts/contact-edit-2" class="com.kwoksys.action.contacts.ContactEdit2Action"/>
+        <action name="contacts/contact-edit" class="com.kwoksys.action.contacts.ContactEditAction">
+          <result name="success">/jsp/contacts/ContactEdit.jsp</result>
+        </action>
+        <action name="contacts/contact-list" class="com.kwoksys.action.contacts.ContactListAction"/>
+        <action name="contacts/index" class="com.kwoksys.action.contacts.IndexAction">
+          <result name="success">/jsp/contacts/Index.jsp</result>
+        </action>
+        <action name="contacts/company-issue" class="com.kwoksys.action.contacts.CompanyIssueAction" method="list"/>
+        <action name="contacts/company-issue-add" class="com.kwoksys.action.contacts.CompanyIssueAddAction"/>
+        <action name="contacts/company-issue-add-2" class="com.kwoksys.action.contacts.CompanyIssueAdd2Action"/>
+        <action name="contacts/company-issue-remove-2" class="com.kwoksys.action.contacts.CompanyIssueAction" method="remove2"/>
+
+        <!--
+            Contracts
+        -->
+        <action name="contracts/index" class="com.kwoksys.action.contracts.IndexAction">
+            <result name="success">/jsp/contracts/Index.jsp</result>
+        </action>
+
+        <action name="contracts/list" class="com.kwoksys.action.contracts.ContractListAction">
+            <result name="success">/jsp/contracts/ContractList.jsp</result>
+        </action>
+
+        <action name="contracts/detail" class="com.kwoksys.action.contracts.ContractAction" method="detail"/>
+
+        <action name="contracts/add" class="com.kwoksys.action.contracts.ContractAction" method="add">
+            <result name="success">/jsp/contracts/ContractAdd.jsp</result>
+        </action>
+        <action name="contracts/add-2" class="com.kwoksys.action.contracts.ContractAction" method="add2"/>
+        <action name="contracts/edit" class="com.kwoksys.action.contracts.ContractEditAction" method="edit">
+            <result name="success">/jsp/contracts/ContractEdit.jsp</result>
+        </action>
+        <action name="contracts/edit-2" class="com.kwoksys.action.contracts.ContractEditAction" method="edit2"/>
+        <action name="contracts/delete" class="com.kwoksys.action.contracts.ContractDeleteAction" method="delete"/>
+        <action name="contracts/delete-2" class="com.kwoksys.action.contracts.ContractDeleteAction" method="delete2"/>
+        
+        <!-- Contract files -->
+        <action name="contracts/file-add" class="com.kwoksys.action.contracts.ContractFileAction" method="add"/>
+        <action name="contracts/file-add-2" class="com.kwoksys.action.contracts.ContractFileAction" method="add2"/>
+        <action name="contracts/file-edit" class="com.kwoksys.action.contracts.ContractFileAction" method="edit"/>
+        <action name="contracts/file-edit-2" class="com.kwoksys.action.contracts.ContractFileAction" method="edit2"/>
+        <action name="contracts/file-delete" class="com.kwoksys.action.contracts.ContractFileAction" method="delete"/>
+        <action name="contracts/file-delete-2" class="com.kwoksys.action.contracts.ContractFileAction" method="delete2"/>
+        <action name="contracts/file-download" class="com.kwoksys.action.contracts.ContractFileAction" method="download"/>
+
+        <action name="contracts/item-list" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="list">
+            <result name="success">/jsp/contracts/ContractRelationship.jsp</result>
+        </action>
+
+        <action name="contracts/hardware-add" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="hardwareAdd">
+            <result name="success">/jsp/contracts/ContractHardwareAdd.jsp</result>
+        </action>
+        <action name="contracts/hardware-add-2" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="hardwareAdd2"/>
+        <action name="contracts/hardware-remove-2" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="hardwareRemove2"/>
+
+        <action name="contracts/software-add" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="softwareAdd">
+            <result name="success">/jsp/contracts/ContractSoftwareAdd.jsp</result>
+        </action>
+
+        <action name="contracts/software-add-2" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="softwareAdd2"/>
+        <action name="contracts/software-remove-2" class="com.kwoksys.action.contracts.ContractRelationshipAction" method="softwareRemove2"/>
+
+        <!-- Contract Contacts -->
+        <action name="contracts/contacts" class="com.kwoksys.action.contracts.ContractContactsAction" method="list"/>
+        <action name="contracts/contact-add" class="com.kwoksys.action.contracts.ContractContactsAction" method="add"/>
+        <action name="contracts/contact-add-2" class="com.kwoksys.action.contracts.ContractContactsAction" method="add2"/>
+        <action name="contracts/contact-remove-2" class="com.kwoksys.action.contracts.ContractContactsAction" method="remove2"/>
+
+        <!--
+            Hardware
+        -->
+        <action name="IT/ajax-get-hardware-detail" class="com.kwoksys.action.hardware.AjaxGetHardwareDetailAction">
+            <result name="success">/jsp/hardware/AjaxGetHardwareDetail.jsp</result>
+        </action>
+        <action name="IT/ajax-get-license-by-software" class="com.kwoksys.action.software.AjaxGetLicenseBySoftwareAction">
+            <result name="success" >/jsp/software/AjaxGetLicenseBySoftware.jsp</result>
+        </action>
+        <action name="IT/ajax-get-software-by-maker" class="com.kwoksys.action.software.AjaxGetSoftwareByMakerAction">
+            <result name="success">/jsp/software/AjaxGetSoftwareByMaker.jsp</result>
+        </action>
+        <action name="hardware/ajax-get-component-custom-fields" class="com.kwoksys.action.hardware.AjaxGetComponentCustomFieldsAction"/>
+        <action name="hardware/index" class="com.kwoksys.action.hardware.IndexAction">
+            <result name="success">/jsp/hardware/Index.jsp</result>
+        </action>
+        <action name="hardware/add" class="com.kwoksys.action.hardware.HardwareAddAction" method="add">
+            <result name="success">/jsp/hardware/HardwareAdd.jsp</result>
+        </action>
+        <action name="hardware/add-2" class="com.kwoksys.action.hardware.HardwareAddAction" method="add2"/>
+        <action name="hardware/detail" class="com.kwoksys.action.hardware.HardwareDetailAction">
+            <result name="success">/jsp/hardware/HardwareDetail.jsp</result>
+        </action>
+        <action name="hardware/delete" class="com.kwoksys.action.hardware.HardwareDeleteAction" method="delete"/>
+        <action name="hardware/delete-2" class="com.kwoksys.action.hardware.HardwareDeleteAction" method="delete2"/>
+        <action name="hardware/edit" class="com.kwoksys.action.hardware.HardwareEditAction" method="edit">
+            <result name="success">/jsp/hardware/HardwareEdit.jsp</result>
+        </action>
+        <action name="hardware/edit-2" class="com.kwoksys.action.hardware.HardwareEditAction" method="edit2"/>
+        <action name="hardware/list" class="com.kwoksys.action.hardware.HardwareListAction">
+            <result name="success">/jsp/hardware/HardwareList.jsp</result>
+        </action>
+        <action name="hardware/list-export" class="com.kwoksys.action.hardware.HardwareListExportAction"/>
+		
+        <!-- Rental Changes -->
+        <action name="hardware/rental" class="com.kwoksys.action.hardware.RentalListAction" method="addCustomer">
+                    <!-- <result name="success">/jsp/hardware/HardwareRentOutList.jsp</result> -->
+        </action>
+        <action name="hardwarerental/list" class="com.kwoksys.action.hardware.RentalListAction" >
+                    <result name="success">/jsp/hardware/HardwareRentOutList.jsp</result>
+        </action>
+        <!-- Hardware files -->
+        <action name="hardware/file" class="com.kwoksys.action.hardware.HardwareFileAction" method="list"/>
+        <action name="hardware/file-add-2" class="com.kwoksys.action.hardware.HardwareFileAction" method="add2"/>
+        <action name="hardware/file-add" class="com.kwoksys.action.hardware.HardwareFileAction" method="add"/>
+        <action name="hardware/file-edit" class="com.kwoksys.action.hardware.HardwareFileAction" method="edit"/>
+        <action name="hardware/file-edit-2" class="com.kwoksys.action.hardware.HardwareFileAction" method="edit2"/>
+        <action name="hardware/file-delete" class="com.kwoksys.action.hardware.HardwareFileAction" method="delete"/>
+        <action name="hardware/file-delete-2" class="com.kwoksys.action.hardware.HardwareFileAction" method="delete2"/>
+        <action name="hardware/file-download" class="com.kwoksys.action.hardware.HardwareFileAction" method="download"/>
+
+        <!-- Hardware licenses -->
+        <action name="hardware/license-add-2" class="com.kwoksys.action.hardware.HardwareLicenseAction" method="add2"/>
+        <action name="hardware/license-remove-2" class="com.kwoksys.action.hardware.HardwareLicenseAction" method="remove2"/>
+
+        <!-- Hardware Issues -->
+        <action name="hardware/issue" class="com.kwoksys.action.hardware.HardwareIssueAction" method="list"/>
+        <action name="hardware/issue-add" class="com.kwoksys.action.hardware.HardwareIssueAction" method="add"/>
+        <action name="hardware/issue-add-2" class="com.kwoksys.action.hardware.HardwareIssueAction" method="add2"/>
+        <action name="hardware/issue-remove-2" class="com.kwoksys.action.hardware.HardwareIssueAction" method="remove2"/>
+
+        <!-- Hardware components -->
+        <action name="hardware/comp" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="list">
+            <result name="success">/jsp/hardware/HardwareComponents.jsp</result>
+        </action>
+        <action name="hardware/comp-add" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="add">
+            <result name="success">/jsp/hardware/HardwareCompAdd.jsp</result>
+        </action>
+        <action name="hardware/comp-add-2" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="add2"/>
+        <action name="hardware/comp-edit" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="edit">
+            <result name="success">/jsp/hardware/HardwareCompEdit.jsp</result>
+        </action>
+        <action name="hardware/comp-edit-2" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="edit2"/>
+        <action name="hardware/comp-delete-2" class="com.kwoksys.action.hardware.HardwareComponentsAction" method="delete2"/>
+        
+        <!-- Hardware Members -->
+        <action name="hardware/hardware-member" class="com.kwoksys.action.hardware.HardwareMemberAction" method="list">
+            <result name="success">/jsp/hardware/HardwareMember.jsp</result>
+        </action>
+        <action name="hardware/hardware-member-add" class="com.kwoksys.action.hardware.HardwareMemberAction" method="add">
+            <result name="add">/jsp/hardware/HardwareMemberAdd.jsp</result>
+        </action>
+        <action name="hardware/hardware-member-add-2" class="com.kwoksys.action.hardware.HardwareMemberAction" method="add2"/>
+        <action name="hardware/hardware-member-remove" class="com.kwoksys.action.hardware.HardwareMemberAction" method="remove"/>
+
+        <!-- Hardware Contacts -->
+        <action name="hardware/contacts" class="com.kwoksys.action.hardware.HardwareContactsAction" method="list"/>
+        <action name="hardware/contact-add" class="com.kwoksys.action.hardware.HardwareContactsAction" method="add"/>
+        <action name="hardware/contact-add-2" class="com.kwoksys.action.hardware.HardwareContactsAction" method="add2"/>
+        <action name="hardware/contact-remove" class="com.kwoksys.action.hardware.HardwareContactsAction" method="remove"/>
+
+        <!-- Home -->
+        <action name="home/index" class="com.kwoksys.action.home.IndexAction">
+            <result name="success">/jsp/home/Index.jsp</result>
+        </action>
+
+        <action name="home/page-not-found" class="com.kwoksys.action.common.errorpage.FileNotFoundAction"/>
+        <action name="home/forbidden" class="com.kwoksys.action.common.errorpage.ForbiddenAction"/>
+        <action name="home/object-not-found" class="com.kwoksys.action.common.errorpage.ObjectNotFoundAction"/>
+        <action name="home/non-supported-browser" class="com.kwoksys.action.common.errorpage.NonSupportedBrowserAction"/>
+
+        <!--
+            Issues
+        -->
+        <action name="issues/index" class="com.kwoksys.action.issues.IndexAction">
+            <result name="success">/jsp/issues/Index.jsp</result>
+        </action>
+        <action name="issues/add" class="com.kwoksys.action.issues.IssueAddAction" method="add">
+            <result name="success">/jsp/issues/IssueAdd.jsp</result>
+        </action>
+        <action name="issues/add-2" class="com.kwoksys.action.issues.IssueAddAction" method="add2"/>
+        <action name="issues/issue-delete" class="com.kwoksys.action.issues.IssueDeleteAction" method="delete"/>
+        <action name="issues/issue-delete-2" class="com.kwoksys.action.issues.IssueDeleteAction" method="delete2"/>
+        <action name="issues/detail" class="com.kwoksys.action.issues.IssueDetailAction">
+            <result name="success">/jsp/issues/IssueDetail.jsp</result>
+        </action>
+        <action name="issues/edit" class="com.kwoksys.action.issues.IssueEditAction" method="edit">
+            <result name="success">/jsp/issues/IssueEdit.jsp</result>
+        </action>
+        <action name="issues/edit-2" class="com.kwoksys.action.issues.IssueEditAction" method="edit2"/>
+        <action name="issues/list" class="com.kwoksys.action.issues.IssueListAction">
+            <result name="success">/jsp/issues/IssueList.jsp</result>
+        </action>
+        <action name="issues/list-export" class="com.kwoksys.action.issues.IssueListExportAction"/>
+        <action name="issues/issue-relationship" class="com.kwoksys.action.issues.IssueRelationshipAction">
+            <result name="success">/jsp/issues/IssueRelationship.jsp</result>
+        </action>
+
+        <!-- Issue files --> 
+        <action name="issues/file-add" class="com.kwoksys.action.issues.IssueFileAction" method="add"/>
+        <action name="issues/file-add-2" class="com.kwoksys.action.issues.IssueFileAction" method="add2"/>
+        <action name="issues/file-download" class="com.kwoksys.action.issues.IssueFileAction" method="download"/>
+        
+        <!-- Issue Plugin module -->
+        <action name="issue-plugin/issue-add" class="com.kwoksys.action.issueplugin.IssueAddAction">
+            <result name="success">/jsp/issueplugin/IssueAdd.jsp</result>
+        </action>
+        <action name="issue-plugin/issue-add-2" class="com.kwoksys.action.issueplugin.IssueAdd2Action"/>
+        <action name="issue-plugin/issue-add-3" class="com.kwoksys.action.issueplugin.IssueAdd3Action"/>
+        <action name="issue-plugin/issue-legend-detail" class="com.kwoksys.action.issueplugin.IssueLegendDetailAction">
+            <result name="success">/jsp/issueplugin/IssueLegendDetail.jsp</result>
+        </action>
+        
+        <!--
+            Knowledge Base
+        -->
+        <action name="kb/index" class="com.kwoksys.action.kb.IndexAction">
+            <result name="success">/jsp/kb/Index.jsp</result>
+        </action>
+        <action name="kb/article-search" class="com.kwoksys.action.kb.ArticleSearchAction">
+            <result name="success">/jsp/kb/ArticleSearch.jsp</result>
+        </action>
+        <action name="kb/article-list" class="com.kwoksys.action.kb.ArticleListAction">
+            <result name="success">/jsp/kb/ArticleList.jsp</result>
+        </action>
+        <action name="kb/article-detail" class="com.kwoksys.action.kb.ArticleDetailAction">
+            <result name="success">/jsp/kb/ArticleDetail.jsp</result>
+            <result name="files">/jsp/kb/ArticleFileCkeditorBrowse.jsp</result>
+        </action>
+        <action name="kb/article-print" class="com.kwoksys.action.kb.ArticlePrintAction">
+            <result name="success">/jsp/kb/ArticlePrint.jsp</result>
+        </action>
+        <action name="kb/article-add" class="com.kwoksys.action.kb.ArticleAddAction" method="add">
+            <result name="success">/jsp/kb/ArticleAdd.jsp</result>
+        </action>
+        <action name="kb/article-add-2" class="com.kwoksys.action.kb.ArticleAddAction" method="add2"/>
+        <action name="kb/article-edit" class="com.kwoksys.action.kb.ArticleEditAction" method="edit">
+            <result name="success">/jsp/kb/ArticleEdit.jsp</result>
+        </action>
+        <action name="kb/article-edit-2" class="com.kwoksys.action.kb.ArticleEditAction" method="edit2"/>
+        <action name="kb/article-delete" class="com.kwoksys.action.kb.ArticleDeleteAction" method="delete"/>
+        <action name="kb/article-delete-2" class="com.kwoksys.action.kb.ArticleDeleteAction" method="delete2"/>
+        
+        <!-- Knowledge Base files -->
+        <action name="kb/article-file-add" class="com.kwoksys.action.kb.ArticleFileAction" method="add"/>
+        <action name="kb/article-file-add-2" class="com.kwoksys.action.kb.ArticleFileAction" method="add2">
+            <result name="success">/jsp/kb/ArticleFileCkeditorAdd.jsp</result>
+        </action>
+        <action name="kb/article-file-delete" class="com.kwoksys.action.kb.ArticleFileAction" method="delete"/>
+        <action name="kb/article-file-delete-2" class="com.kwoksys.action.kb.ArticleFileAction" method="delete2"/>
+        <action name="kb/article-file-download" class="com.kwoksys.action.kb.ArticleFileAction" method="download"/>
+       
+        <action name="kb/category-list" class="com.kwoksys.action.kb.CategoryAction" method="list"/>
+        <action name="kb/category-add" class="com.kwoksys.action.kb.CategoryAction" method="add">
+            <result name="success">/jsp/kb/CategoryAdd.jsp</result>
+        </action>
+        <action name="kb/category-add-2" class="com.kwoksys.action.kb.CategoryAction" method="add2"/>
+        <action name="kb/category-edit" class="com.kwoksys.action.kb.CategoryAction" method="edit">
+            <result name="success">/jsp/kb/CategoryEdit.jsp</result>
+        </action>
+        <action name="kb/category-edit-2" class="com.kwoksys.action.kb.CategoryAction" method="edit2"/>
+
+        <!--
+            Portal
+        -->
+        <action name="portal/site-add" class="com.kwoksys.action.portal.SiteAddAction" method="add">
+            <result name="success">/jsp/portal/SiteAdd.jsp</result>
+        </action>
+        <action name="portal/site-add-2" class="com.kwoksys.action.portal.SiteAddAction" method="add2"/>
+        <action name="portal/site-edit" class="com.kwoksys.action.portal.SiteEditAction" method="edit">
+            <result name="success">/jsp/portal/SiteEdit.jsp</result>
+        </action>
+        <action name="portal/site-edit-2" class="com.kwoksys.action.portal.SiteEditAction" method="edit2"/>
+        <action name="portal/site-detail" class="com.kwoksys.action.portal.SiteDetailAction"/>
+
+        <action name="portal/site-list-index" class="com.kwoksys.action.portal.SiteListIndexAction">
+            <result name="success">/jsp/portal/SiteListIndex.jsp</result>
+        </action>
+
+        <action name="portal/site-list" class="com.kwoksys.action.portal.SiteListAction"/>
+        <action name="portal/site-list-rss" class="com.kwoksys.action.portal.SiteListRssAction"/>
+        <action name="portal/site-delete" class="com.kwoksys.action.portal.SiteDeleteAction" method="delete"/>
+        <action name="portal/site-delete-2" class="com.kwoksys.action.portal.SiteDeleteAction" method="delete2"/>
+
+        <action name="portal/site-category-list" class="com.kwoksys.action.portal.SiteCategoryAction" method="list"/>
+
+        <action name="portal/site-category-add" class="com.kwoksys.action.portal.SiteCategoryAction" method="add">
+            <result name="success">/jsp/portal/CategoryAdd.jsp</result>
+        </action>
+        <action name="portal/site-category-add-2" class="com.kwoksys.action.portal.SiteCategoryAction" method="add2"/>
+        <action name="portal/site-category-edit" class="com.kwoksys.action.portal.SiteCategoryAction" method="edit">
+            <result name="success">/jsp/portal/CategoryEdit.jsp</result>
+        </action>
+        <action name="portal/site-category-edit-2" class="com.kwoksys.action.portal.SiteCategoryAction" method="edit2"/>
+
+        <action name="rss/feed-list" class="com.kwoksys.action.rss.IndexAction">
+            <result name="success">/jsp/rss/Index.jsp</result>
+        </action>
+        <action name="rss/feed-list-titles" class="com.kwoksys.action.rss.RssFeedListTitlesAction">
+            <result name="success">/jsp/rss/FeedListTitles.jsp</result>
+        </action>
+        <action name="rss/feed-list-items" class="com.kwoksys.action.rss.RssFeedListItemsAction">
+            <result name="success">/jsp/rss/FeedListItems.jsp</result>
+        </action>
+        <action name="rss/feed-add" class="com.kwoksys.action.rss.RssFeedAddAction" method="add">
+            <result name="success">/jsp/rss/FeedAdd.jsp</result>
+        </action>
+        <action name="rss/feed-add-2" class="com.kwoksys.action.rss.RssFeedAddAction" method="add2"/>
+        <action name="rss/feed-edit" class="com.kwoksys.action.rss.RssFeedEditAction" method="edit">
+            <result name="success">/jsp/rss/FeedEdit.jsp</result>
+        </action>
+        <action name="rss/feed-edit-2" class="com.kwoksys.action.rss.RssFeedEditAction"  method="edit2"/>
+        <action name="rss/feed-delete" class="com.kwoksys.action.rss.RssFeedDeleteAction" method="delete"/>
+        <action name="rss/feed-delete-2" class="com.kwoksys.action.rss.RssFeedDeleteAction" method="delete2"/>
+
+        <!-- Reports -->
+        <action name="reports/report-type-select" class="com.kwoksys.action.reports.ReportTypeSelectionAction">
+            <result name="success">/jsp/reports/ReportTypeSelection.jsp</result>
+        </action>
+        <action name="reports/report-search-criteria" class="com.kwoksys.action.reports.ReportSearchCriteriaAction">
+            <result name="success">/jsp/reports/ReportSearchCriteria.jsp</result>
+        </action>
+        <action name="reports/report-issue" class="com.kwoksys.action.reports.ReportPreviewIssueResultsAction">
+            <result name="success">/jsp/reports/ReportPreviewResults.jsp</result>
+        </action>
+        <action name="reports/report-hardware" class="com.kwoksys.action.reports.ReportPreviewHardwareResultsAction">
+            <result name="success">/jsp/reports/ReportPreviewResults.jsp</result>
+        </action>
+        <action name="reports/report-software" class="com.kwoksys.action.reports.ReportPreviewSoftwareResultsAction">
+            <result name="success">/jsp/reports/ReportPreviewResults.jsp</result>
+        </action>
+        <action name="reports/report-software-usage" class="com.kwoksys.action.reports.ReportPreviewSoftwareUsageResultsAction">
+            <result name="success">/jsp/reports/ReportPreviewResults.jsp</result>
+        </action>
+        <action name="reports/report-contract" class="com.kwoksys.action.reports.ReportPreviewContractResultsAction">
+            <result name="success">/jsp/reports/ReportPreviewResults.jsp</result>
+        </action>
+        <action name="reports/report-results-export" class="com.kwoksys.action.reports.ReportResultsExportAction">
+            <result name="html_table">/jsp/reports/ReportResultsTable.jsp</result>
+            <result name="html_list">/jsp/reports/ReportResultsList.jsp</result>
+        </action>
+        
+        <!--
+            Software
+        -->
+        <action name="software/index" class="com.kwoksys.action.software.IndexAction">
+            <result name="success">/jsp/software/Index.jsp</result>
+        </action>
+        <action name="software/list" class="com.kwoksys.action.software.SoftwareListAction">
+            <result name="success">/jsp/software/SoftwareList.jsp</result>
+        </action>
+        <action name="software/list-export" class="com.kwoksys.action.software.SoftwareListExportAction"/>
+        <action name="software/add" class="com.kwoksys.action.software.SoftwareAddAction" method="add">
+            <result name="success">/jsp/software/SoftwareAdd.jsp</result>
+        </action>
+        <action name="software/add-2" class="com.kwoksys.action.software.SoftwareAddAction" method="add2"/>
+        <action name="software/detail" class="com.kwoksys.action.software.SoftwareDetailAction">
+            <result name="success">/jsp/software/SoftwareDetail.jsp</result>
+        </action>
+        <action name="software/ajax-get-license-details" class="com.kwoksys.action.software.AjaxGetLicenseDetailsAction">
+            <result name="success">/jsp/software/AjaxGetLicenseDetails.jsp</result>
+        </action>
+        <action name="software/ajax-get-license-custom-fields" class="com.kwoksys.action.software.AjaxGetLicenseDetailsAction">
+            <result name="success">/jsp/common/template/CustomFields.jsp</result>
+        </action>
+        <action name="software/delete" class="com.kwoksys.action.software.SoftwareDeleteAction" method="delete"/>
+        <action name="software/delete-2" class="com.kwoksys.action.software.SoftwareDeleteAction" method="delete2"/>
+        <action name="software/edit" class="com.kwoksys.action.software.SoftwareEditAction" method="edit">
+            <result name="success">/jsp/software/SoftwareEdit.jsp</result>
+        </action>
+        <action name="software/edit-2" class="com.kwoksys.action.software.SoftwareEditAction" method="edit2"/>
+
+        <!-- Software Files -->
+        <action name="software/file" class="com.kwoksys.action.software.SoftwareFileAction" method="list"/>
+        <action name="software/file-add" class="com.kwoksys.action.software.SoftwareFileAction" method="add"/>
+        <action name="software/file-add-2" class="com.kwoksys.action.software.SoftwareFileAction" method="add2"/>
+        <action name="software/file-edit" class="com.kwoksys.action.software.SoftwareFileAction" method="edit"/>
+        <action name="software/file-edit-2" class="com.kwoksys.action.software.SoftwareFileAction" method="edit2"/>
+        <action name="software/file-delete" class="com.kwoksys.action.software.SoftwareFileAction" method="delete"/>
+        <action name="software/file-delete-2" class="com.kwoksys.action.software.SoftwareFileAction" method="delete2"/>
+        <action name="software/file-download" class="com.kwoksys.action.software.SoftwareFileAction" method="download"/>
+
+        <!-- Software Bookmarks -->
+        <action name="software/bookmark-add" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="add">
+            <result name="success">/jsp/software/SoftwareBookmarkAdd.jsp</result>
+        </action>
+        <action name="software/bookmark-add-2" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="add2"/>
+        <action name="software/bookmark" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="list">
+            <result name="success">/jsp/software/SoftwareBookmark.jsp</result>
+        </action>
+        <action name="software/bookmark-delete-2" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="delete2"/>
+        <action name="software/bookmark-edit" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="edit">
+            <result name="success">/jsp/software/SoftwareBookmarkEdit.jsp</result>
+        </action>
+        <action name="software/bookmark-edit-2" class="com.kwoksys.action.software.SoftwareBookmarkAction" method="edit2"/>
+
+        <!-- Software Licenses -->
+        <action name="software/license-add" class="com.kwoksys.action.software.SoftwareLicensesAction" method="add">
+            <result name="success">/jsp/software/SoftwareLicenseAdd.jsp</result>
+        </action>
+        <action name="software/license-add-2" class="com.kwoksys.action.software.SoftwareLicensesAction" method="add2"/>
+        <action name="software/license-edit" class="com.kwoksys.action.software.SoftwareLicensesAction" method="edit">
+            <result name="success">/jsp/software/SoftwareLicenseEdit.jsp</result>
+        </action>
+        <action name="software/license-edit-2" class="com.kwoksys.action.software.SoftwareLicensesAction" method="edit2"/>
+        <action name="software/license-delete-2" class="com.kwoksys.action.software.SoftwareLicensesAction" method="delete2"/>
+
+        <!-- Software Issues -->
+        <action name="software/issue" class="com.kwoksys.action.software.SoftwareIssueAction" method="list"/>
+        <action name="software/issue-add" class="com.kwoksys.action.software.SoftwareIssueAddAction" method="add"/>
+        <action name="software/issue-add-2" class="com.kwoksys.action.software.SoftwareIssueAddAction" method="add2"/>
+        <action name="software/issue-remove-2" class="com.kwoksys.action.software.SoftwareIssueAction" method="remove2"/>
+
+        <!-- Software Contacts -->
+        <action name="software/contacts" class="com.kwoksys.action.software.SoftwareContactsAction" method="list"/>
+        <action name="software/contact-add" class="com.kwoksys.action.software.SoftwareContactsAction" method="add"/>
+        <action name="software/contact-add-2" class="com.kwoksys.action.software.SoftwareContactsAction" method="add2"/>
+        <action name="software/contact-remove-2" class="com.kwoksys.action.software.SoftwareContactsAction" method="remove2"/>
+
+        <action name="user-preference/index" class="com.kwoksys.action.userpreference.IndexAction">
+            <result name="success">/jsp/userpreference/Index.jsp</result>
+        </action>
+
+        <action name="user-preference/password-edit" class="com.kwoksys.action.userpreference.PasswordEditAction" method="edit">
+            <result name="success">/jsp/userpreference/PasswordEdit.jsp</result>
+        </action>
+        <action name="user-preference/password-edit-2" class="com.kwoksys.action.userpreference.PasswordEditAction" method="edit2"/>
+
+        <action name="user-preference/contact-edit" class="com.kwoksys.action.userpreference.ContactEditAction" method="edit">
+            <result name="success">/jsp/userpreference/ContactEdit.jsp</result>
+        </action>
+
+        <action name="user-preference/contact-edit-2" class="com.kwoksys.action.userpreference.ContactEditAction" method="edit2"/>
+    </package>
+</struts>
